@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="1" author="kassia.zama">
+        <preConditions onFail="MARK_RAN" onFailMessage="A tabela CLIENTE já existe no database">
+            <not>
+                <tableExists tableName="CLIENTE"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="CLIENTE">
+            <column name="id" autoIncrement="true" type="int">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CLIENTE"/>
+            </column>
+
+            <column name="nomecompleto" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="telefone" type="varchar(9)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="email" type="varchar(150)">
+                <constraints nullable="false"/>
+            </column>
+
+
+            <column name="cpf" type="varchar(11)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="cnpj" type="varchar(14)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="nomeempresa" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="kassia.zama">
+        <preConditions onFail="MARK_RAN" onFailMessage="A tabela MENSAGEM já existe no database">
+            <not>
+                <tableExists tableName="MENSAGEM"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="MENSAGEM">
+            <column name="id" autoIncrement="true" type="int">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_MENSAGEM"/>
+            </column>
+
+            <column name="cliente_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="telefone" type="varchar(9)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="iswhatsapp" type="boolean" defaultValueBoolean="true"/>
+
+            <column name="dataenvio" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="MENSAGEM" baseColumnNames="cliente_id"
+                                 constraintName="FK_MENSAGEM_CLIENTE"
+                                 referencedTableName="CLIENTE"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="3" author="kassia.zama">
+        <preConditions onFail="MARK_RAN" onFailMessage="A tabela PLANO já existe no database">
+            <not>
+                <tableExists tableName="PLANO"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="PLANO">
+            <column name="id" autoIncrement="true" type="int">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PLANO"/>
+            </column>
+
+            <column name="cliente_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="tipoplano" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="saldototal" type="numeric(10,2)"/>
+            <column name="limitetotal" type="numeric(10,2)"/>
+            <column name="limiteconsumido" type="numeric(10,2)"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="PLANO" baseColumnNames="cliente_id"
+                                 constraintName="FK_PLANO_CLIENTE"
+                                 referencedTableName="CLIENTE"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>
