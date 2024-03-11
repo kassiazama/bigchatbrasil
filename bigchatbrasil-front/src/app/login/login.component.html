@@ -1,0 +1,38 @@
+<div class="container mt-5">
+  <div class="row mb-3 mt-5">
+    <div class="col-md-12 text-center mb-3">
+      <img src="assets/bcb.png" class="img-fluid" alt="Imagem" style="max-height: 400px;">
+    </div>
+  </div>
+
+  <div class="row mb-3 justify-content-center">
+    <div class="col-md-9">
+      <form [formGroup]="form">
+        <label for="email" class="form-label">E-mail</label>
+        <input type="text" class="form-control" id="email" formControlName="email" placeholder="Digite seu e-mail">
+      </form>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-9 text-center">
+      <button type="submit" (click)="login()" class="btn button btn-lg">Login</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title">Cadastro não encontrado</h4>
+  </div>
+  <div class="modal-body">
+    Para acessar a plataforma Big Chat Brasil é necessário ter uma conta cadastrada.
+    <br><br>
+    <strong>Deseja se cadastrar?</strong>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn button" [routerLink]="'/cadastrar'" (click)="closeModal()">Sim</button>
+    <button type="button" class="btn btn-danger" (click)="closeModal()">Não</button>
+  </div>
+</ng-template>
+

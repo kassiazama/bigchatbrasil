@@ -1,0 +1,30 @@
+:root {
+  --primary-color: #72B01D;
+  --secondary-color: #B0228C;
+}
+
+.button {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+}
+
+.button:hover {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.primary-color {
+  background: var(--primary-color);
+}
+
+.header-kassia {
+  margin-top: 10rem;
+  margin-bottom: 5rem;
+}
+
+.btn-danger {
+  font-weight: bold;
+}
+
+

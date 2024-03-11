@@ -1,0 +1,35 @@
+<div class="container mt-5">
+<div class="row header-kassia">
+    <div class="col-md-6 offset-md-3">
+      <ng-container *ngIf="isPrePago">
+        <h5 class="mb-3">Saldo: <span id="saldo"> {{ saldo?.saldoTotal }} </span></h5>
+      </ng-container>
+
+      <ng-container *ngIf="!isPrePago">
+        <h5 class="mb-3">Limite Máximo: <span id="limite"> {{ saldo?.limiteTotal }} </span></h5>
+        <h6 class="mb-3">Saldo Utilizado: <span id="saldoUtilizado"> {{ saldo?.saldoConsumido }} </span></h6>
+      </ng-container>
+
+      <form id="formulario" [formGroup]="form">
+        <div class="mb-3">
+          <label for="telefone" class="form-label">Telefone</label>
+          <input type="tel" class="form-control" id="telefone" formControlName="telefone" placeholder="Digite o telefone" mask="0 0000-0000" required>
+        </div>
+        <div class="mb-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="whatsapp" id="whatsapp" formControlName="isWhatsApp">
+            <label class="form-check-label" for="whatsapp">
+              É WhatsApp?
+            </label>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="mensagem" class="form-label">Mensagem</label>
+          <textarea class="form-control" id="mensagem" rows="3" formControlName="mensagem" placeholder="Digite a mensagem" required></textarea>
+        </div>
+        <h6 class="mb-3">Valor cobrado por mensagem: R$ 0,25</h6>
+        <button type="submit" class="btn button" (click)="save()" [disabled]="form.invalid">Enviar</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="row header-kassia">
+    <h1>Gerenciador</h1>
+  </div>
+
+  <form [formGroup]="form">
+    <div class="row mb-3 mt-5">
+      <div class="col-md-3 mb-3">
+        <select class="form-select" aria-label="Default select example" formControlName="tipoPlano">
+          <option [ngValue]="null" disabled selected>Selecione uma opção</option>
+          <option [value]="'POS_PAGO'">Pós Pago</option>
+          <option [value]="'PRE_PAGO'">Pré Pago</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <button type="submit" (click)="atualizarPlano()" class="btn button">Atualizar Tipo Plano</button>
+      </div>
+    </div>
+
+    <ng-container *ngIf="tipoPlanoValue === 'PRE_PAGO'">
+      <div class="row">
+        <div class="col-md-3">
+          <label for="saldo" class="form-label">Saldo Disponível</label>
+          <input type="number" class="form-control" id="saldo" formControlName="saldoPrePagoTotal" readonly>
+        </div>
+        <div class="col-md-3">
+          <label for="saldoAdicionado" class="form-label">Saldo Desejado</label>
+          <input type="number" class="form-control" id="saldoAdicionado" formControlName="saldoAdicionado">
+        </div>
+        <div class="col-md-3 mt-md-auto mt-3 mb-0">
+          <button type="submit" (click)="atualizarSaldo()" class="btn button">Adicionar Saldo</button>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="tipoPlanoValue === 'POS_PAGO'">
+      <div class="row mb-4">
+        <div class="col-md-3">
+          <label for="limite" class="form-label">Limíte Disponível</label>
+          <input type="text" class="form-control" id="limite" formControlName="limiteTotal">
+        </div>
+        <div class="col-md-4 mt-md-auto mt-3 mb-0">
+          <button type="submit" (click)="atualizarSaldo()" class="btn button" [disabled]="!limiteChanged">Atualizar
+            Limíte Máximo
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </form>
+
+  <div class="row border-top mt-3 pb-3"></div>
+
+  <form [formGroup]="formPessoa">
+    <div class="row mb-3 mt-3">
+      <div class="col-md-9 mb-3">
+        <label for="nome" class="form-label">Nome Completo</label>
+        <input type="text" class="form-control" id="nome" readonly formControlName="nomeCompleto">
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="cpfResponsavel" class="form-label">CPF</label>
+        <input type="text" class="form-control" id="cpfResponsavel" readonly formControlName="cpf"
+               mask="000.000.000-00">
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="email" class="form-label">E-mail</label>
+        <input type="email" class="form-control" id="email" readonly formControlName="email">
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="telefone" class="form-label">Telefone</label>
+        <input type="text" class="form-control" id="telefone" readonly formControlName="telefone" mask="0 0000-0000">
+      </div>
+      <div class="row border-top mt-3 pb-3">
+        <div class="col-md-9 mt-3">
+          <label for="nomeEmpresa" class="form-label">Nome da Empresa</label>
+          <input type="text" class="form-control" id="nomeEmpresa" readonly formControlName="nomeEmpresa">
+        </div>
+        <div class="col-md-3 mt-3 mb-3">
+          <label for="cnpj" class="form-label">CNPJ</label>
+          <input type="text" class="form-control" id="cnpj" readonly formControlName="cnpj" mask="00.000.000/0000-0">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
